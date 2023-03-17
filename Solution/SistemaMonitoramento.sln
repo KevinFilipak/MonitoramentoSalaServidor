@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. Documentos", "00. Documentos", "{FFFA88D2-2F91-49D1-8AA1-BFF9726BB78F}"
+	ProjectSection(SolutionItems) = preProject
+		Start.txt = Start.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Hardware", "01. Hardware", "{F5721BAE-605E-4A9E-9AD7-A36DE04F09EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73B36E30-D5D7-4AAC-9CEC-1B9251B98EC6}
+	EndGlobalSection
+EndGlobal
