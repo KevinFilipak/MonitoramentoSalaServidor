@@ -1,4 +1,10 @@
 /.vs
 *.suo
-/TCC.Arquivos/bin
-/TCC.Arquivos/obj
+/SistemaMonitoramento.API/bin
+/SistemaMonitoramento.API/obj
+/SistemaMonitoramento.Model/bin
+/SistemaMonitoramento.Model/obj
+/SistemaMonitoramento.DataAccess/bin
+/SistemaMonitoramento.DataAccess/obj
+/SistemaMonitoramento.Util/bin
+/SistemaMonitoramento.Util/obj
