@@ -29,9 +29,9 @@ namespace SistemaMonitoramento.API.Controllers
 
                 var obj = new Monitoramento();
 
-                obj.MONITORAMENTO_F_TEMPERATURA = Convert.ToDouble(Temperatura);
-                obj.MONITORAMENTO_F_UMIDADE = Convert.ToDouble(Umidade);
-                obj.MONITORAMENTO_D_DATA = DateTime.Now;
+                obj.monitoramento_f_temperatura = Convert.ToDouble(Temperatura);
+                obj.monitoramento_f_umidade = Convert.ToDouble(Umidade);
+                obj.monitoramento_d_data = DateTime.Now;
 
                 _ctx.ctxMonitoramento.Salvar(obj, out message, out status);
 

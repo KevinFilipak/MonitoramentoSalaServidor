@@ -7,8 +7,8 @@ namespace SistemaMonitoramento.Model.Validation
     {
         public MonitoramentoValidator()
         {
-            RuleFor(x => x.MONITORAMENTO_F_TEMPERATURA).NotEmpty();
-            RuleFor(x => x.MONITORAMENTO_F_UMIDADE).NotEmpty();
+            RuleFor(x => x.monitoramento_f_temperatura).NotEmpty();
+            RuleFor(x => x.monitoramento_f_umidade).NotEmpty();
         }
 
     }

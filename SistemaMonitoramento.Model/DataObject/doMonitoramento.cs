@@ -21,9 +21,9 @@ namespace SistemaMonitoramento.Model.DataObject
                     db.ExecStoreProcedure(EnumStoreProcedures.sp_Insert_Monitoramento.ToString(),
                         new RepositoryParameter[]
                         {
-                            new RepositoryParameter("@MONITORAMENTO_F_TEMPERATURA", obj.MONITORAMENTO_F_TEMPERATURA, DbType.Double),
-                            new RepositoryParameter("@MONITORAMENTO_F_UMIDADE", obj.MONITORAMENTO_F_UMIDADE, DbType.Double),
-                            new RepositoryParameter("@MONITORAMENTO_D_DATA", obj.MONITORAMENTO_D_DATA, DbType.DateTime),
+                            new RepositoryParameter("@monitoramento_f_temperatura", obj.monitoramento_f_temperatura, DbType.Double),
+                            new RepositoryParameter("@monitoramento_f_umidade", obj.monitoramento_f_umidade, DbType.Double),
+                            new RepositoryParameter("@monitoramento_d_data", obj.monitoramento_d_data, DbType.DateTime),
                         });
 
                     db.CommitTran();
@@ -52,10 +52,10 @@ namespace SistemaMonitoramento.Model.DataObject
                     db.ExecStoreProcedure(EnumStoreProcedures.sp_Update_Monitoramento.ToString(),
                         new RepositoryParameter[]
                         {
-                            new RepositoryParameter("@MONITORAMENTO_I_ID", obj.MONITORAMENTO_I_ID, DbType.Int32),
-                            new RepositoryParameter("@MONITORAMENTO_F_TEMPERATURA", obj.MONITORAMENTO_F_TEMPERATURA, DbType.Double),
-                            new RepositoryParameter("@MONITORAMENTO_F_UMIDADE", obj.MONITORAMENTO_F_UMIDADE, DbType.Double),
-                            new RepositoryParameter("@MONITORAMENTO_D_DATA", obj.MONITORAMENTO_D_DATA, DbType.DateTime),
+                            new RepositoryParameter("@monitoramento_i_id", obj.monitoramento_i_id, DbType.Int32),
+                            new RepositoryParameter("@monitoramento_f_temperatura", obj.monitoramento_f_temperatura, DbType.Double),
+                            new RepositoryParameter("@monitoramento_f_umidade", obj.monitoramento_f_umidade, DbType.Double),
+                            new RepositoryParameter("@monitoramento_d_data", obj.monitoramento_d_data, DbType.DateTime),
                         });
 
                     db.CommitTran();
@@ -84,7 +84,7 @@ namespace SistemaMonitoramento.Model.DataObject
                     db.ExecStoreProcedure(EnumStoreProcedures.sp_Delete_Monitoramento.ToString(),
                         new RepositoryParameter[]
                         {
-                            new RepositoryParameter("@MONITORAMENTO_I_ID", obj.MONITORAMENTO_I_ID, DbType.Int32),
+                            new RepositoryParameter("@monitoramento_i_id", obj.monitoramento_i_id, DbType.Int32),
                         });
 
                     db.CommitTran();
@@ -141,7 +141,7 @@ namespace SistemaMonitoramento.Model.DataObject
             }
         }
 
-        public static Monitoramento GetByKey(int usuario_i_id)
+        public static Monitoramento GetByKey(int monitoramento_i_id)
         {
             using (IDataBase db = Repository.SelectRepository())
             {
@@ -152,7 +152,7 @@ namespace SistemaMonitoramento.Model.DataObject
                     using (IDataReader dr = db.ExecStoreProcedureDR(EnumStoreProcedures.sp_Select_Monitoramento_GetByKey.ToString(),
                         new RepositoryParameter[]
                         {
-                            new RepositoryParameter("@MONITORAMENTO_I_ID", obj.MONITORAMENTO_I_ID, DbType.Int32),
+                            new RepositoryParameter("@monitoramento_i_id", obj.monitoramento_i_id, DbType.Int32),
                         }))
                     {
                         while (dr.Read())

@@ -1,11 +1,4 @@
-﻿using SistemaMonitoramento.Model.Class;
-using SistemaMonitoramento.Model.DataObject;
-using SistemaMonitoramento.Model.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SistemaMonitoramento.Model.Domain;
 
 namespace SistemaMonitoramento.Model.IoC
 {

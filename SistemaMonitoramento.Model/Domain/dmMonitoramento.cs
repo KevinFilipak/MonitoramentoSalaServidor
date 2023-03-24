@@ -53,7 +53,7 @@ namespace SistemaMonitoramento.Model.Domain
                     message = "Problema na validação dos dados!";
                     status = "error";
                 }
-                else if (obj.MONITORAMENTO_I_ID == 0)
+                else if (obj.monitoramento_i_id == 0)
                 {
                     message = "Registro adicionado com sucesso!";
                     status = "success";                    
@@ -79,7 +79,7 @@ namespace SistemaMonitoramento.Model.Domain
         {
             try
             {
-                if (obj.MONITORAMENTO_I_ID == 0)
+                if (obj.monitoramento_i_id == 0)
                 {
                     message = "Objeto inválido!";
                     status = "error";
