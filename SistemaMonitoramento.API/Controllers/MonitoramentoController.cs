@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SistemaMonitoramento.Model.Class;
 using SistemaMonitoramento.Model.IoC;
+using SistemaMonitoramento.Util.Servicos;
 
 namespace SistemaMonitoramento.API.Controllers
 {
@@ -34,6 +35,10 @@ namespace SistemaMonitoramento.API.Controllers
                 obj.monitoramento_d_data = DateTime.Now;
 
                 _ctx.ctxMonitoramento.Salvar(obj, out message, out status);
+
+                var enviarSMS = new Comunicacao();
+
+                //Comunicacao.EnviarSMS(Temperatura, Umidade);
 
                 return "OK";
             }
