@@ -1,4 +1,5 @@
-﻿using SistemaMonitoramento.Model.Domain;
+﻿
+using SistemaMonitoramento.Model.Domain;
 
 namespace SistemaMonitoramento.Model.IoC
 {
