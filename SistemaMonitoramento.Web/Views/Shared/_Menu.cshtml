@@ -1,0 +1,230 @@
+﻿@using SistemaMonitoramento.Util.Servicos
+@using System.Security.Claims
+@{
+
+    var usuario = new SistemaMonitoramento.Model.Class.Usuario();
+    var menu = new List<SistemaMonitoramento.Model.Class.Tela>();
+    var titulo = "Dashboard";
+    var controller = "";
+
+    var _userIdentity = User.Identity as ClaimsIdentity;
+
+    if (_userIdentity != null)
+    {
+        var _array = Context.Request.QueryString.Value.Split('/').ToList();
+        var _controller = "";
+
+
+
+        foreach (var claim in _userIdentity.Claims)
+        {
+            if (claim.Type == "Tela")
+            {
+                menu.Add(new SistemaMonitoramento.Model.Class.Tela
+                        {
+                            tela_s_controller = claim.Value.Substring(0, 5),
+                            tela_s_titulo = claim.Value.Substring(8),
+                            tela_s_path = claim.Value.Substring(0, 2) == "CA" ? "Cadastros" : "",
+                        });
+            }
+
+        }
+
+        if (_array.Count > 4)
+        {
+            _controller = _array[_array.Count - 1];
+
+            if (_array.Count > 4)
+            {
+                controller = _array[_array.Count - 1];
+            }
+
+
+        }
+    }
+
+}
+
+<div id="kt_aside" class="aside bg-primary" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggler">
+    <div class="aside-primary d-flex flex-column align-items-center flex-row-auto">
+        <div class="aside-logo d-flex flex-column align-items-center flex-column-auto py-4 pt-lg-10 pb-lg-7" id="kt_aside_logo">
+            <a href="@Url.Action("Index", "Dashboard", new { path = "Home" })">
+                <img alt="Logo" src="@Url.Content("~/images/logo/logo.png") " class="mh-50px" />
+                @*                <h1 style="color:white">DEFAULT</h1>*@
+
+            </a>
+        </div>
+        <div class="aside-nav d-flex flex-column align-items-center flex-column-fluid pt-0 pb-5" id="kt_aside_nav">
+            <div class="hover-scroll-y" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_nav" data-kt-scroll-offset="10px">
+                <ul class="nav flex-column">
+
+                    @if (menu.Where(m => m.tela_s_controller.Substring(0, 2) == "CA").ToList().Count > 0)
+                    {
+                        <li class="nav-item mb-1" title="Cadastros Gerais" data-bs-toggle="tooltip" data-bs-dismiss="click" data-bs-placement="right">
+                            <a href="#" class="nav-link h-40px w-40px h-lg-50px w-lg-50px btn btn-custom btn-icon btn-color-white @(controller.Contains("CA") ? "active" : "")" data-bs-toggle="tab" data-bs-target="#menu_cadastros" role="tab">
+                                <span class="svg-icon svg-icon-2 svg-icon-lg-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
+                                            <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3" />
+                                        </g>
+                                    </svg>
+                                </span>
+                            </a>
+                        </li>
+                    }
+                    @if (menu.Where(m => m.tela_s_controller.Substring(0, 2) == "MS").ToList().Count > 0)
+                    {
+                        <li class="nav-item mb-1" title="Módulo Serviços" data-bs-toggle="tooltip" data-bs-dismiss="click" data-bs-placement="right">
+                            <a href="#" class="nav-link h-40px w-40px h-lg-50px w-lg-50px btn btn-custom btn-icon btn-color-white @(controller.Contains("MS") ? "active" : "")" data-bs-toggle="tab" data-bs-target="#menu_servicos" role="tab">
+                                <span class="svg-icon svg-icon-2 svg-icon-lg-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path opacity="0.3" d="M22.0318 8.59998C22.0318 10.4 21.4318 12.2 20.0318 13.5C18.4318 15.1 16.3318 15.7 14.2318 15.4C13.3318 15.3 12.3318 15.6 11.7318 16.3L6.93177 21.1C5.73177 22.3 3.83179 22.2 2.73179 21C1.63179 19.8 1.83177 18 2.93177 16.9L7.53178 12.3C8.23178 11.6 8.53177 10.7 8.43177 9.80005C8.13177 7.80005 8.73176 5.6 10.3318 4C11.7318 2.6 13.5318 2 15.2318 2C16.1318 2 16.6318 3.20005 15.9318 3.80005L13.0318 6.70007C12.5318 7.20007 12.4318 7.9 12.7318 8.5C13.3318 9.7 14.2318 10.6001 15.4318 11.2001C16.0318 11.5001 16.7318 11.3 17.2318 10.9L20.1318 8C20.8318 7.2 22.0318 7.59998 22.0318 8.59998Z" fill="black" />
+                                        <path d="M4.23179 19.7C3.83179 19.3 3.83179 18.7 4.23179 18.3L9.73179 12.8C10.1318 12.4 10.7318 12.4 11.1318 12.8C11.5318 13.2 11.5318 13.8 11.1318 14.2L5.63179 19.7C5.23179 20.1 4.53179 20.1 4.23179 19.7Z" fill="black" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </li>
+                    }
+                    @if (menu.Where(m => m.tela_s_controller.Substring(0, 2) == "MF").ToList().Count > 0)
+                    {
+                        <li class="nav-item mb-1" title="Módulo Financeiro" data-bs-toggle="tooltip" data-bs-dismiss="click" data-bs-placement="right">
+                            <a href="#" class="nav-link h-40px w-40px h-lg-50px w-lg-50px btn btn-custom btn-icon btn-color-white @(controller.Contains("MF") ? "active" : "")" data-bs-toggle="tab" data-bs-target="#menu_financeiro" role="tab">
+                                <span class="svg-icon svg-icon-2 svg-icon-lg-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path opacity="0.3" d="M12.5 22C11.9 22 11.5 21.6 11.5 21V3C11.5 2.4 11.9 2 12.5 2C13.1 2 13.5 2.4 13.5 3V21C13.5 21.6 13.1 22 12.5 22Z" fill="black" />
+                                        <path d="M17.8 14.7C17.8 15.5 17.6 16.3 17.2 16.9C16.8 17.6 16.2 18.1 15.3 18.4C14.5 18.8 13.5 19 12.4 19C11.1 19 10 18.7 9.10001 18.2C8.50001 17.8 8.00001 17.4 7.60001 16.7C7.20001 16.1 7 15.5 7 14.9C7 14.6 7.09999 14.3 7.29999 14C7.49999 13.8 7.80001 13.6 8.20001 13.6C8.50001 13.6 8.69999 13.7 8.89999 13.9C9.09999 14.1 9.29999 14.4 9.39999 14.7C9.59999 15.1 9.8 15.5 10 15.8C10.2 16.1 10.5 16.3 10.8 16.5C11.2 16.7 11.6 16.8 12.2 16.8C13 16.8 13.7 16.6 14.2 16.2C14.7 15.8 15 15.3 15 14.8C15 14.4 14.9 14 14.6 13.7C14.3 13.4 14 13.2 13.5 13.1C13.1 13 12.5 12.8 11.8 12.6C10.8 12.4 9.99999 12.1 9.39999 11.8C8.69999 11.5 8.19999 11.1 7.79999 10.6C7.39999 10.1 7.20001 9.39998 7.20001 8.59998C7.20001 7.89998 7.39999 7.19998 7.79999 6.59998C8.19999 5.99998 8.80001 5.60005 9.60001 5.30005C10.4 5.00005 11.3 4.80005 12.3 4.80005C13.1 4.80005 13.8 4.89998 14.5 5.09998C15.1 5.29998 15.6 5.60002 16 5.90002C16.4 6.20002 16.7 6.6 16.9 7C17.1 7.4 17.2 7.69998 17.2 8.09998C17.2 8.39998 17.1 8.7 16.9 9C16.7 9.3 16.4 9.40002 16 9.40002C15.7 9.40002 15.4 9.29995 15.3 9.19995C15.2 9.09995 15 8.80002 14.8 8.40002C14.6 7.90002 14.3 7.49995 13.9 7.19995C13.5 6.89995 13 6.80005 12.2 6.80005C11.5 6.80005 10.9 7.00005 10.5 7.30005C10.1 7.60005 9.79999 8.00002 9.79999 8.40002C9.79999 8.70002 9.9 8.89998 10 9.09998C10.1 9.29998 10.4 9.49998 10.6 9.59998C10.8 9.69998 11.1 9.90002 11.4 9.90002C11.7 10 12.1 10.1 12.7 10.3C13.5 10.5 14.2 10.7 14.8 10.9C15.4 11.1 15.9 11.4 16.4 11.7C16.8 12 17.2 12.4 17.4 12.9C17.6 13.4 17.8 14 17.8 14.7Z" fill="black" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="aside-secondary d-flex flex-row-fluid bg-white">
+        <div class="aside-workspace my-7 ps-5 pe-4 ps-lg-10 pe-lg-6" id="kt_aside_wordspace">
+            <div class="tab-content">
+
+                <div class="tab-pane fade @(controller == "" ? "active show" : "")" id="menu_dashboard">
+                    <div class="menu menu-column menu-rounded menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold fs-6" data-kt-menu="true">
+                        <div class="hover-scroll-y pe-4 pe-lg-5" id="kt_aside_menu_scroll" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_aside_wordspace" data-kt-scroll-offset="10px">
+                            <div class="menu-wrapper menu-column menu-fit">
+                                <div class="menu-item here show">
+                                    <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text-uppercase">Home</h4>
+                                    <div class="menu-sub menu-fit menu-sub-accordion show pb-10">
+
+                                        <div class="menu-item">
+                                            <a class="menu-link py-2" href="@Url.Action("Index", "Dashboard", new { path = "Home" })">
+                                                <span class="menu-title">Dashboard</span>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                @if (menu.Where(m => m.tela_s_controller.Substring(0, 2) == "CA").ToList().Count > 0)
+                {
+                    <div class="tab-pane fade @(controller.Contains("CA") ? "active show" : "")" id="menu_cadastros">
+                        <div class="menu menu-column menu-rounded menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold fs-6" data-kt-menu="true">
+                            <div class="hover-scroll-y pe-4 pe-lg-5" id="kt_aside_menu_scroll" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_aside_wordspace" data-kt-scroll-offset="10px">
+                                <div class="menu-wrapper menu-column menu-fit">
+                                    <div class="menu-item here show">
+                                        <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text-uppercase">Cadastros Gerais</h4>
+                                        <div class="menu-sub menu-fit menu-sub-accordion show pb-10">
+
+                                            @foreach (var item in menu.Where(m => m.tela_s_controller.Substring(0, 2) == "CA").ToList())
+                                            {
+                                                <div class="menu-item">
+                                                    <a class="menu-link py-2" href="@Url.Action("Index", item.tela_s_controller)">
+                                                        <span class="menu-title">@item.tela_s_descricao_completa</span>
+                                                    </a>
+                                                </div>
+
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (menu.Where(m => m.tela_s_controller.Substring(0, 2) == "MS").ToList().Count > 0)
+                {
+                    <div class="tab-pane fade @(controller.Contains("MS") ? "active show" : "")" id="menu_servicos">
+                        <div class="menu menu-column menu-rounded menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold fs-6" data-kt-menu="true">
+                            <div class="hover-scroll-y pe-4 pe-lg-5" id="kt_aside_menu_scroll" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_aside_wordspace" data-kt-scroll-offset="10px">
+                                <div class="menu-wrapper menu-column menu-fit">
+                                    <div class="menu-item here show">
+                                        <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text-uppercase">Módulo Serviços</h4>
+                                        <div class="menu-sub menu-fit menu-sub-accordion show pb-10">
+
+                                            @foreach (var item in menu.Where(m => m.tela_s_controller.Substring(0, 2) == "MS").ToList())
+                                            {
+                                                <div class="menu-item">
+                                                    <a class="menu-link py-2" href="@Url.Action("Index", item.tela_s_controller)">
+                                                        <span class="menu-title">@item.tela_s_descricao_completa</span>
+                                                    </a>
+                                                </div>
+
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (menu.Where(m => m.tela_s_controller.Substring(0, 2) == "MF").ToList().Count > 0)
+                {
+                    <div class="tab-pane fade @(controller.Contains("MF") ? "active show" : "")" id="menu_financeiro">
+                        <div class="menu menu-column menu-rounded menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold fs-6" data-kt-menu="true">
+                            <div class="hover-scroll-y pe-4 pe-lg-5" id="kt_aside_menu_scroll" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_aside_wordspace" data-kt-scroll-offset="10px">
+                                <div class="menu-wrapper menu-column menu-fit">
+                                    <div class="menu-item here show">
+                                        <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text-uppercase">Módulo Financeiro</h4>
+                                        <div class="menu-sub menu-fit menu-sub-accordion show pb-10">
+
+                                            @foreach (var item in menu.Where(m => m.tela_s_controller.Substring(0, 2) == "MF").ToList())
+                                            {
+                                                <div class="menu-item">
+                                                    <a class="menu-link py-2" href="@Url.Action("Index", item.tela_s_controller)">
+                                                        <span class="menu-title">@item.tela_s_descricao_completa</span>
+                                                    </a>
+                                                </div>
+
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+    <div class="aside-footer d-flex flex-column align-items-center flex-column-auto py-5 py-lg-7" id="kt_aside_footer">
+        <button class="btn btn-sm btn-icon btn-white btn-active-primary position-absolute translate-middle start-100 end-0 bottom-0 shadow-sm d-none d-lg-flex active" id="kt_aside_toggle" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="aside-minimize" title="Esconder Menu" style="display:none">
+            <span class="svg-icon svg-icon-2 rotate-180">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="black" />
+                    <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="black" />
+                </svg>
+            </span>
+        </button>
+    </div>
+</div>

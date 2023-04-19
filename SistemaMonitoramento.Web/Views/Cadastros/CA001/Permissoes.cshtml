@@ -1,0 +1,102 @@
+﻿<input type="hidden" id="usuario_i_id" value="@ViewBag.usuario_i_id" />
+
+
+<div class="modal" tabindex="-1" id="mdlFormulario" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    Permissões
+                </h3>
+                <button type="button" class="btn-close" onclick="FecharForm()"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="card-body  py-3">
+                
+                    <div class="table-responsive">
+                        <table id="Permissoes" class="table table-hover table-row-bordered gy-5">
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                
+                <button type="reset" class="btn btn-color-gray-600 btn-light fw-bolder px-6 py-3" onclick="FecharForm()">Fechar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    var _permissoes;
+
+    $(document).ready(function () {
+
+        _permissoes = $('#Permissoes').DataTable({
+
+            buttons: [
+
+            ],
+            columns: [
+                {
+                    data: "permissao_i_id", render: function (data, type, row, meta) { return '<input type="checkbox" ' + row.permissao_s_checked + ' id="permissao_' + row.permissao_i_tela + '" OnClick="Check(' + row.permissao_i_tela + ', ' + row.permissao_i_usuario + ')" />'}, title: '', className: "center", width: "3%", orderable: false,
+                },
+                { data: 'permissao_s_titulo', title: 'Tela', className: "left", width: "97%" },                
+            ],
+            order: [[1, 'asc']],
+
+            // Não alterar daqui para baixo
+
+            dom: "<'row'<'col-sm-3 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'B><'col-sm-9 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'>>" +
+                "<'row mb-2 '<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'><'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'>>",
+            proccessing: false,
+            serverSide: true,
+            info: false,
+            drawCallback: function (settings) {
+                $('[data-bs-toggle="tooltip"]').tooltip();
+            },
+            language: {
+                url: "@Url.Content("~/content/datatables/pt-br.json")",
+            },
+            ajax: {
+                url: "@Url.Action("PermissoesJson", "CA001")",
+                dataSrc: "data",
+                type: "POST",
+                data: function (d) {
+                    d.usuario_i_id = $('#usuario_i_id').val()
+                }
+            },
+        });
+
+
+
+    });
+
+
+        
+        function Check(permissao_i_tela, permissao_i_usuario) {
+
+            $.ajax({
+                url: "@Url.Content("/CADASTROS/CA001/SetPermissao")",
+                data: { permissao_i_tela: permissao_i_tela, permissao_i_usuario: permissao_i_usuario },
+                dataType: 'json',
+                success: function (data) {
+                    displayMessage(data.message, data.status);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    displayMessage("Erro! " + error, "error");
+                }
+            });
+
+        }
+
+
+
+</script>

@@ -1,0 +1,226 @@
+﻿@using SistemaMonitoramento.Model.Class;
+
+@model Usuario
+
+<form id="formulario" class="form" action="#" autocomplete="off" enctype="multipart/form-data">
+
+    @Html.AntiForgeryToken()
+
+    <div class="modal" tabindex="-1" id="mdlFormulario" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">
+
+                        @if (Model.usuario_i_id == 0)
+                        {
+                            @Html.Raw("Novo")
+                        }
+                        else
+                        {
+                            @Html.Raw("Editar")
+                        }
+
+                    </h3>
+                    <button type="button" class="btn-close" onclick="FecharFormCusto()"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="card-body  py-3">
+
+                        @Html.HiddenFor(m => m.usuario_i_id)
+                        @Html.HiddenFor(m => m.usuario_s_foto)                        
+
+                        <div class="row mb-3 fv-row">
+                            <label class="col-lg-3 col-form-label required fw-bold">Usuário</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.usuario_s_usuario, new { @class = "form-control form-control-lg " })
+                            </div>
+                        </div>
+                        <div class="row mb-3 fv-row">
+                            <label class="col-lg-3 col-form-label fw-bold">Senha</label>
+                            <div class="col-lg-9">
+                                @Html.PasswordFor(m => m.usuario_s_senha, new { @class = "form-control form-control-lg " })
+                            </div>
+                        </div>      
+                        <hr />
+                        <div class="row mb-3 fv-row">
+                            <label class="col-lg-3 col-form-label required fw-bold">Nome</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.usuario_s_nome, new { @class = "form-control form-control-lg " })
+                            </div>
+                        </div>                       
+                        <div class="row mb-3 fv-row">
+                            <label class="col-lg-3 col-form-label required fw-bold">E-mail</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.usuario_s_email, new { @class = "form-control form-control-lg " })
+                            </div>
+                        </div>                                                                    
+                        <div class="row mb-3 fv-row">
+                            <label class="col-lg-3 col-form-label fw-bold">Função</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.usuario_s_funcao, new { @class = "form-control form-control-lg " })
+                            </div>
+                        </div>
+                        <div class="row mb-3 fv-row">
+                            <label class="col-lg-3 col-form-label required fw-bold">Status</label>
+                            <div class="col-lg-9">
+                                @Html.DropDownListFor(m => m.usuario_s_status, null, "", new { @class = "form-select form-select-lg" })
+                            </div>
+                        </div>
+                        <div class="row mb-3 fv-row">
+                            <label class="col-lg-3 col-form-label fw-bold">Foto</label>
+                            <div class="col-lg-9">
+                                <input type="file" name="foto" id="foto" class="form-control form-control-lg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+
+                    <button id="btnSalvar" type="button" class="btn btn-primary fw-bolder px-6 py-3 me-3" onclick="Salvar()">
+                        <span class="indicator-label">
+                            Salvar
+                        </span>
+                        <span class="indicator-progress">
+                            Enviando... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                    <button type="reset" class="btn btn-color-gray-600 btn-light fw-bolder px-6 py-3" onclick="FecharForm()">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<script>
+
+    var validator;
+
+    $(document).ready(function () {
+
+        $("#usuario_s_status").select2({ dropdownParent: $('#mdlFormulario .modal-content'), language: "pt-BR", placeholder: "-- Selecione --", allowClear: true, dropdownPosition: 'below' });
+        Inputmask({
+            mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@Html.Raw("@")*{1,20}[.*{2,6}][.*{1,2}]",
+            greedy: false,
+            onBeforePaste: function (pastedValue, opts) {
+                pastedValue = pastedValue.toLowerCase();
+                return pastedValue.replace("mailto:", "");
+            },
+            definitions: {
+                "*": {
+                    validator: '[0-9A-Za-z!#$%&"*+/=?^_`{|}~\-]',
+                    cardinality: 1,
+                    casing: "lower"
+                }
+            }
+        }).mask("#usuario_s_email");
+
+        const form = document.getElementById('formulario');
+
+        validator = FormValidation.formValidation(
+            form,
+            {
+                fields: {                    
+                    'usuario_s_usuario': {
+                        validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
+                    },
+                    'usuario_s_nome': {
+                        validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
+                    },
+                    'usuario_s_email': {
+                        validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
+                    },
+                    'usuario_s_status': {
+                        validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
+                    }
+                },
+
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap: new FormValidation.plugins.Bootstrap5({
+                        rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+                    })
+                }
+            }
+        );
+
+
+
+    });
+
+    function Salvar() {
+        if (validator) {
+            validator.validate().then(function (status) {
+
+                if (status == 'Valid') {
+
+                    submitButton = document.getElementById('btnSalvar');
+
+                    submitButton.setAttribute('data-kt-indicator', 'on');
+                    submitButton.disabled = true;
+
+                    const formData = new FormData(document.forms.item(0));
+                    let file = $('#foto').prop("files")[0];
+                    formData.append('file', file);
+                    
+
+                    $.ajax({
+                        url: "@Url.Content("/CADASTROS/CA001/Form")" ,
+                        data: formData,
+                        dataType: 'json',
+                        processData: false,
+                        contentType: false,
+                        type: 'post',
+                        success: function (data) {
+
+                            submitButton.removeAttribute('data-kt-indicator');
+                            submitButton.disabled = false;
+
+                            Swal.fire({
+                                text: data.message,
+                                icon: data.status,
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn btn-secondary"
+                                },
+                            });
+
+                            if (data.status == "success") {
+
+                                FecharForm();
+                            }
+
+                        },
+                        error: function () {
+
+                            submitButton.removeAttribute('data-kt-indicator');
+                            submitButton.disabled = false;
+
+                            Swal.fire({
+                                text: "Algo deu errado!!!",
+                                icon: "danger",
+                                buttonsStyling: false,
+                                confirmButtonText: "Fechar",
+                                customClass: {
+                                    confirmButton: "btn btn-danger"
+                                },
+                            });
+
+
+                        }
+                    });
+
+                }
+            });
+        }
+    }
+
+
+</script>

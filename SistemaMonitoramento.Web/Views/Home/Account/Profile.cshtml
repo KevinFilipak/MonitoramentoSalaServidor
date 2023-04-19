@@ -1,0 +1,182 @@
+﻿@using SistemaMonitoramento.Model.Class;
+
+@model Usuario
+
+<div class="card">
+    <!--begin::Form-->
+    <form id="formulario" class="form d-flex flex-center">
+        
+        @Html.AntiForgeryToken()
+
+        <div class="card-body mw-800px py-20">
+            
+            <div class="row mb-8">
+                <label class="col-lg-3 col-form-label">Usuário</label>
+                <div class="col-lg-9">
+                    <div class="spinner spinner-sm spinner-primary spinner-right">
+                        <input class="form-control form-control-lg form-control-solid disabled" type="text" value="@Model.usuario_s_usuario" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-8">
+                <label class="col-lg-3 col-form-label">Nome</label>
+                <div class="col-lg-9">
+                    <div class="spinner spinner-sm spinner-primary spinner-right">
+                        <input class="form-control form-control-lg form-control-solid disabled" type="text" value="@Model.usuario_s_nome" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-8">
+                <label class="col-lg-3 col-form-label">E-mail</label>
+                <div class="col-lg-9">
+                    <div class="input-group input-group-lg input-group-solid">
+                        <span class="input-group-text pe-0">
+                            <i class="la la-at fs-4"></i>
+                        </span>
+                       <input class="form-control form-control-lg form-control-solid disabled" type="text" value="@Model.usuario_s_email" readonly>
+                    </div>                    
+                </div>
+            </div>
+            <div class="row mb-8">
+                <label class="col-lg-3 col-form-label">Função</label>
+                <div class="col-lg-9">
+                    <div class="spinner spinner-sm spinner-primary spinner-right">
+                        <input class="form-control form-control-lg form-control-solid disabled" type="text" value="@Model.usuario_s_funcao" readonly>
+                    </div>
+                </div>
+            </div>
+                  
+            <hr />
+
+            <div class="row mb-8 fv-row">
+                <label class="col-lg-3 col-form-label required">Senha</label>
+                <div class="col-lg-9">
+                    <div class="spinner spinner-sm spinner-primary spinner-right">                        
+                        @Html.TextBoxFor(m => m.usuario_s_senha, new { @class = "form-control form-control-lg form-control-solid " })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-8 fv-row">
+                <label class="col-lg-3 col-form-label required">Confirmar Senha</label>
+                <div class="col-lg-9">
+                    <div class="spinner spinner-sm spinner-primary spinner-right">
+                        @Html.TextBoxFor(m => m.usuario_s_confirmar_senha, new { @class = "form-control form-control-lg form-control-solid " })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ">
+                <label class="col-lg-3 col-form-label"></label>
+                <div class="col-lg-9">
+
+                    <button id="btnSalvar" type="button" class="btn btn-primary fw-bolder px-6 py-3 me-3" onclick="Salvar()">
+                        <span class="indicator-label">
+                            Alterar Senha
+                        </span>
+                        <span class="indicator-progress">
+                            Alterando... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                    
+                </div>
+            </div>            
+        </div>
+    </form>    
+</div>
+
+<script type="text/javascript">
+
+    var validator;
+
+    $(document).ready(function () {
+
+
+        const form = document.getElementById('formulario');
+        
+        validator = FormValidation.formValidation(
+            form,
+            {
+                fields: {
+                    'usuario_s_senha': {
+                        validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
+                    },
+                    'usuario_s_confirmar_senha': {
+                        validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
+                    }
+                },
+        
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap: new FormValidation.plugins.Bootstrap5({
+                        rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+                    })
+                }
+            }
+        );
+
+
+
+    });
+
+    function Salvar() {
+        if (validator) {
+            validator.validate().then(function (status) {
+
+                if (status == 'Valid') {
+
+                    submitButton = document.getElementById('btnSalvar');
+
+                    submitButton.setAttribute('data-kt-indicator', 'on');
+                    submitButton.disabled = true;
+                    
+                    $.ajax({
+                        url: "@Url.Content("/Home/Account/ChangePassword")",
+                        data: $('#formulario').serialize(),
+                        dataType: 'json',                        
+                        type: 'post',
+                        success: function (data) {
+
+                            submitButton.removeAttribute('data-kt-indicator');
+                            submitButton.disabled = false;
+
+                            Swal.fire({
+                                text: data.message,
+                                icon: data.status,
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn btn-secondary"
+                                },
+                            });  
+                            
+                            $("#usuario_s_senha").val('');
+                            $("#usuario_s_confirmar_senha").val('');
+                        },
+                        error: function () {
+
+                            submitButton.removeAttribute('data-kt-indicator');
+                            submitButton.disabled = false;
+
+                            Swal.fire({
+                                text: "Algo deu errado!!!",
+                                icon: "danger",
+                                buttonsStyling: false,
+                                confirmButtonText: "Fechar",
+                                customClass: {
+                                    confirmButton: "btn btn-danger"
+                                },
+                            });
+
+
+                        }
+                    });
+
+                }
+            });
+        }
+    }
+
+</script>

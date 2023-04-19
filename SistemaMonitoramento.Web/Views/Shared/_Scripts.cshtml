@@ -1,0 +1,169 @@
+﻿<script type="text/javascript">
+    
+    function SubmitForm(formulario, URL) {
+        var form = $('#' + formulario).serialize();
+
+        var _urlBase = "@Url.Content("/")";
+
+        console.log(_urlBase);
+
+        $.ajax({
+            url: _urlBase + URL,
+            type: "POST",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: form,
+            success: function (data) {
+                if (data.status == "success") {
+                    window.location.href = data.redirect;
+                }
+                else {
+                    alert(data.message);
+                }    
+            },
+            error: function (xhr, error) {
+                alert("Erro! " + error);
+            }
+        }); 
+    }
+
+    $(document).ready(function () {
+        $.fn.dataTable.Buttons.defaults.dom.button.className = 'btn';
+        $.fn.dataTable.ext.errMode = (settings, help_page_number, message) => {
+            console.log(settings);
+            console.log(help_page_number);
+            console.log(message);
+
+            Swal.fire({
+                text: message,
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Fechar",
+                customClass: {
+                    confirmButton: "btn btn-danger"
+                },
+            });
+        };
+        numeral.locale('pt-br');
+    });
+
+
+
+
+
+    $(document).on('select2:open', () => {
+        let allFound = document.querySelectorAll('.select2-container--open .select2-search__field');
+        $(this).one('mouseup', () => {
+            setTimeout(() => {
+                allFound[allFound.length - 1].focus();
+            }, 0);
+        });
+    });
+
+    $('.nav-link').click(function () {
+
+        $("#kt_body").removeAttr("data-kt-aside-minimize");
+        $("#kt_aside_toggle").removeClass('active');
+    });
+
+    $('.wrapper').click(function () {
+
+        $("#kt_body").attr("data-kt-aside-minimize", "on");
+        $("#kt_aside_toggle").addClass('active');
+
+    });
+
+    var displayMessage = function (message, msgType) {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-full-width",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        toastr[msgType]('', message);
+    };
+
+    var displayNotify = function (message, msgType) {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        toastr[msgType]('', message);
+    };
+
+    
+
+    function FormataNumber(value, pattern) {
+
+        return numeral(value).format(pattern);
+
+    }
+
+    function FormataDateTime(value, pattern) {
+        return moment(value).format(pattern);
+
+    }
+
+
+    function EpochToDate(epoch) {
+        // if (epoch < 10000000000)
+        //     epoch *= 1000;
+        // var epoch = epoch + (new Date(0)); //for timeZone
+        return new Date(epoch);
+    }
+
+
+    function SomenteNumeros(string) {
+        var numsStr = string.replace(/[^0-9]/g, '');
+        return parseInt(numsStr);
+    }
+
+    var substringMatcher = function (strs) {
+        return function findMatches(q, cb) {
+            var matches, substringRegex;
+
+            // an array that will be populated with substring matches
+            matches = [];
+
+            // regex used to determine if a string contains the substring `q`
+            substrRegex = new RegExp(q, 'i');
+
+            // iterate through the pool of strings and for any string that
+            // contains the substring `q`, add it to the `matches` array
+            $.each(strs, function (i, str) {
+                if (substrRegex.test(str)) {
+                    matches.push(str);
+                }
+            });
+
+            cb(matches);
+        };
+    };
+
+</script>

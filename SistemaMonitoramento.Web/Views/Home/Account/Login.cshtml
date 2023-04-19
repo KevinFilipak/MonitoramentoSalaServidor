@@ -1,0 +1,66 @@
+﻿@model SistemaMonitoramento.Model.Class.Usuario
+
+@{
+    Layout = "~/views/shared/_Login.cshtml";
+}
+@{
+    var returnUrl = ViewData["ReturnUrl"] as string;
+    var error = TempData["error_message"] as string;
+}
+
+<input type="hidden" id="error_message" value="@error" />
+
+<div class="d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
+    <div class="d-flex flex-column flex-lg-row-auto bg-primary w-lg-600px pt-15 pt-lg-0">
+        <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5">
+            <a href="#" class="mb-6">
+                <img alt="Logo" src="@Url.Content("~/images/logo/logo.png")" class="h-100px h-lg-150px" />
+            </a>
+            @*<h3 class="fw-bolder fs-2x text-white lh-lg">
+                C.S.
+                <br>Consultoria e Serviços
+            </h3>*@
+        </div>
+
+    </div>
+    <div class="login-content flex-lg-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100">
+        <div class="d-flex flex-column-fluid flex-center py-10">
+
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, htmlAttributes: new { @class = "form w-100" }))
+            {
+                @Html.HiddenFor(model => model.usuario_s_pagina_anterior)
+                @Html.HiddenFor(model => model.usuario_s_lembrar_me)
+
+@*                <div class="pb-5 pb-lg-15">
+                    <h3 class="fw-bolder text-dark display-6">Seja bem-vindo</h3>
+                </div>*@
+                <div class="fv-row mb-10">
+                    <label class="form-label fs-6 fw-bolder text-dark">Usuário</label>
+                    @Html.TextBoxFor(model => model.usuario_s_usuario, htmlAttributes: new { @class = "form-control form-control-lg form-control-solid", @autocomplete = "off", @autofocus = "", @placeholder = "Usuário", @required = "required" })
+                </div>
+                <div class="fv-row mb-10">
+                    <div class="d-flex justify-content-between mt-n5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">Senha</label>
+                    </div>
+                    @Html.PasswordFor(model => model.usuario_s_senha, htmlAttributes: new { @class = "form-control form-control-lg form-control-solid", @autocomplete = "off", @autofocus = "", @placeholder = "Senha", @required = "required" })
+                </div>
+                <div class="pb-lg-0 pb-5">
+                    <button type="submit" id="kt_login_signin_form_submit_button" class="btn btn-primary fw-bolder fs-6 px-8 py-4 my-3 me-3" name="login">Entrar</button>
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        if ($('#error_message').val() != "") {
+            displayMessage($('#error_message').val(), 'error');
+        }
+
+    });
+</script>

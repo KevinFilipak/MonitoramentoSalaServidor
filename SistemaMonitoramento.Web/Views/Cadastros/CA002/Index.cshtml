@@ -1,0 +1,137 @@
+﻿<div class="card mb-2">
+
+
+    <div class="card-body text-gray-700">
+
+
+        <div id="divTable">
+            @Html.Partial("~/Views/Cadastros/CA002/Grid.cshtml")
+        </div>
+
+
+        <div id="divForm" style="display: none">
+            
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function Form(tela_i_id) {
+
+        $.ajax({
+            url: "@Url.Content("/CADASTROS/CA002/Form")" ,
+            data: { tela_i_id: tela_i_id  },
+            dataType: 'html',
+            success: function (data) {
+
+                $('#divForm').html(data);
+                $("#divForm").show();
+                $("#mdlFormulario").modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+
+                $("#divForm").css('display', 'block');
+                $("#divList").css('display', 'none');
+
+                Swal.fire({
+                    text: "Algo deu errado!!!",
+                    icon: "danger",
+                    buttonsStyling: false,
+                    confirmButtonText: "Fechar",
+                    customClass: {
+                        confirmButton: "btn btn-danger"
+                    },
+                });
+            }
+        });
+
+    }
+
+    function Excluir(tela_i_id, tela_s_titulo) {
+
+
+        Swal.fire({
+            text: 'Confirmar a exclusão da Tela ' + tela_s_titulo + '?',
+            title: 'Excluir',
+            icon: "error",
+            buttonsStyling: false,
+            showDenyButton: true,
+            confirmButtonText: 'Sim',
+            denyButtonText: 'Não',
+            customClass: {
+                confirmButton: "btn btn-danger",
+                denyButton: "btn btn-secondary"
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "@Url.Content("/CADASTROS/CA002/Excluir")" ,
+                    data: { tela_i_id: tela_i_id  },
+                    dataType: 'json',
+                    type: 'post',
+                    success: function (data) {
+
+                        if (data.status == "success") {
+
+                            Swal.fire({
+                                text: data.message,
+                                icon: data.status,
+                                buttonsStyling: false,
+                                confirmButtonText: "Fechar",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                },
+                            });
+
+                            FecharFormCusto();
+                        }
+                        else {
+                            Swal.fire({
+                                text: data.message,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Fechar",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                },
+                            });
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {                        
+                        Swal.fire({
+                            text: "Algo deu errado!!!",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Fechar",
+                            customClass: {
+                                confirmButton: "btn btn-danger"
+                            },
+                        });
+                    }
+                });
+            }
+        })
+
+    }
+
+    function FecharFormCusto() {
+
+        ReloadGrid();
+
+        $("#mdlFormulario").modal('hide');
+        $('#divForm').html("");
+        $("#divForm").hide();
+    }
+
+    function ReloadGrid() {
+        _tabela.ajax.reload(null, false);
+    }
+
+</script>

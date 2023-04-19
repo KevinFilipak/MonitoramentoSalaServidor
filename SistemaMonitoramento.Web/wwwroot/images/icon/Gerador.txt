@@ -1,0 +1,12 @@
+Acessar o site: https://www.favicon-generator.org/
+
+> Escolher arquivo
+> Marcar: Generate icons for Web, Android, Microsoft, and iOS (iPhone and iPad) Apps
+          Maintain Image Dimensions (don't resize to be square)
+		  Include your favicon.ico in the public gallery.
+
+
+https://convertico.com/
+
+
+https://realfavicongenerator.net/

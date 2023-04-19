@@ -1,0 +1,51 @@
+﻿@model Exception
+
+
+<div class="card mb-2">
+
+
+    <div class="card-body text-gray-700">
+
+        @if (Model != null)
+        {
+
+            <h3>Erro: @Model.GetType().Name</h3>
+
+            <p class="fs-6 mb-8">@Model.Message</p>
+        }
+        else
+        {
+            <h3>Erro</h3>
+        }
+
+
+    </div>
+</div>
+
+
+
+@{
+    Layout = "~/views/shared/_Error.cshtml";
+}
+
+
+<div class="d-flex flex-column flex-root">
+    <div class="d-flex flex-column flex-column-fluid position-relative" style="background-color: #EAF9FC;">
+        <div class="bgi-size-contain bgi-position-x-end bgi-position-y-bottom bgi-no-repeat position-absolute top-0 start-0 w-100 h-100" style="background-image: url(@Url.Content("~/content/images/img-3.png"));"></div>
+        <div class="px-10 px-md-20 pt-10 pt-md-14 z-index-1">
+            <a href="@Url.Action("Index", "Dashboard", new { path = "Home" })">
+                <img alt="Logo" src="@Url.Content("~/images/logo/logo.png")" class="h-75px" />
+            </a>
+        </div>
+        <div class="px-10 px-md-20 py-10 py-md-0 d-flex flex-column justify-content-md-center align-items-start flex-root w-md-700px z-index-1">
+
+            <p class="display-6 fw-bolder text-gray-800 mb-8">Erro: @Model.GetType().Name</p>
+            <p class="fs-6 mb-8">@Model.Message</p>
+
+            <a href="@Url.Action("Index", "Dashboard", new { path = "Home" })" class="btn btn-primary fs-6 fw-bolder py-4 px-6 me-auto" style="color: white!important">Retornar para Página Inicial</a>
+        </div>
+    </div>
+</div>
+
+
+
