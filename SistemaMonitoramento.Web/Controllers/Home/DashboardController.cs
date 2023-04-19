@@ -31,7 +31,7 @@ namespace SistemaMonitoramento.Web.Controllers.Home
             var obj = new List<Dashboard>();
 
             var item = new Dashboard();
-            item.dashboard_s_dispositivo = "CPD 01";
+            item.dashboard_s_dispositivo = "Sala do Servidor";
             item.dashboard_s_temperatura = "25 °C";
             item.dashboard_s_umidade = "25 %";
 
