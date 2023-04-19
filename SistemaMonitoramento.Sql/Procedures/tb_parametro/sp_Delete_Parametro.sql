@@ -9,7 +9,7 @@ CREATE PROCEDURE sp_Delete_Parametro
 AS
 SET NOCOUNT OFF;
 
-    DELETE tb_monitoramento
+    DELETE tb_parametro
      WHERE monitoramento_i_id = @monitoramento_i_id
 
 SET NOCOUNT ON;
