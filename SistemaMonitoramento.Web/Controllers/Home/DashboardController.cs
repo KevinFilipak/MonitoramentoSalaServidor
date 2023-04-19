@@ -28,7 +28,31 @@ namespace SistemaMonitoramento.Web.Controllers.Home
         [HttpGet("Home/Dashboard/Index")]        
         public IActionResult Index()
         {
-            return View("~/Views/Home/Dashboard/Index.cshtml");
+            var obj = new List<Dashboard>();
+
+            var item = new Dashboard();
+            item.dashboard_s_dispositivo = "CPD 01";
+            item.dashboard_s_temperatura = "25 °C";
+            item.dashboard_s_umidade = "25 %";
+
+            var item2 = new Dashboard();
+            item2.dashboard_s_dispositivo = "CPD 02";
+            item2.dashboard_s_temperatura = "22 °C";
+            item2.dashboard_s_umidade = "32 %";
+
+
+            var item3 = new Dashboard();
+            item3.dashboard_s_dispositivo = "CPD 03";
+            item3.dashboard_s_temperatura = "18 °C";
+            item3.dashboard_s_umidade = "67 %";
+
+            obj.Add(item);
+            obj.Add(item2);
+            obj.Add(item3);
+
+            ViewBag.Objetos = obj;
+
+            return View("~/Views/Home/Dashboard/Index.cshtml") ;
         }        
 
         [HttpGet("Home/Dashboard/Error")]

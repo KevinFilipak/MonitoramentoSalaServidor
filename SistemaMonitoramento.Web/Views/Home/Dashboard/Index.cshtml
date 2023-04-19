@@ -1,1 +1,36 @@
-﻿
+﻿@foreach (var objeto in ViewBag.Objetos)
+{
+    <div class="card border border-3 border-dashed border-danger">
+        <div class="card-body py-1 align-content-center">
+            <div class="row">
+                <div class="col-md-4 mt-7">
+                    <div class="center display-3">
+                        <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_dispositivo</span>
+                    </div>
+                    <div class="center">
+                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Dispositivo</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-7">
+                    <div class="center display-3">
+                        <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_temperatura</span>
+                    </div>
+                    <div class="center">
+                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Temperatura Atual</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-7">
+                    <div class="center display-3">
+                        <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_umidade</span>
+                    </div>
+                    <div class="center">
+                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Umidade Atual</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+    </div>
+    <br/>
+}
+
