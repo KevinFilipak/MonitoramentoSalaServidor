@@ -10,6 +10,9 @@ namespace SistemaMonitoramento.Model.IoC
         dmPermissao ctxPermissao { get; }
         dmTela ctxTela { get; }
         dmPermissaoEspecial ctxPermissaoEspecial { get; }
+        dmDispositivo ctxDispositivo { get; }
+        dmDashboard ctxDashboard { get; }
+
 
     }
 
@@ -20,6 +23,8 @@ namespace SistemaMonitoramento.Model.IoC
         public dmPermissao ctxPermissao { get; set; }
         public dmTela ctxTela { get; set; }
         public dmPermissaoEspecial ctxPermissaoEspecial { get; set; }
+        public dmDispositivo ctxDispositivo { get; set; }
+        public dmDashboard ctxDashboard { get; set; }
 
 
 
@@ -31,7 +36,8 @@ namespace SistemaMonitoramento.Model.IoC
             ctxPermissao = new dmPermissao();
             ctxTela = new dmTela();
             ctxPermissaoEspecial = new dmPermissaoEspecial();
-
+            ctxDispositivo = new dmDispositivo();
+            ctxDashboard = new dmDashboard();
 
         }
 

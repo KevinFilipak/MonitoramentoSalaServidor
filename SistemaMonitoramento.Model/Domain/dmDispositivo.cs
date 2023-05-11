@@ -1,18 +1,17 @@
 ﻿using SistemaMonitoramento.Model.Class;
 using SistemaMonitoramento.Model.DataObject;
 using SistemaMonitoramento.Model.Validation;
-using SistemaMonitoramento.Model.DataObject;
 
 namespace SistemaMonitoramento.Model.Domain
 {
-    public class dmDispositivo
+    public class dmTela
     {
 
-        public List<Dispositivo> BuscarTodos(string filtro)
+        public List<Tela> BuscarTodos(string filtro)
         {
             try
             {
-                return doDispositivo.GetAll(filtro).ToList();
+                return doTela.GetAll(filtro).ToList();
             }
             catch (Exception ex)
             {                
@@ -20,11 +19,11 @@ namespace SistemaMonitoramento.Model.Domain
             }
         }
 
-        public Dispositivo BuscarPorId(int dispositivo_i_id)
+        public Tela BuscarPorId(int tela_i_id)
         {
             try
             {
-                return doDispositivo.GetByKey(dispositivo_i_id);
+                return doTela.GetByKey(tela_i_id);
             }
             catch (Exception ex)
             {                
@@ -32,11 +31,11 @@ namespace SistemaMonitoramento.Model.Domain
             }
         }
 
-        public bool Validar(Dispositivo obj)
+        public bool Validar(Tela obj)
         {
             try
             {
-                return new DispositivoValidator().Validate(obj).IsValid;
+                return new TelaValidator().Validate(obj).IsValid;
             }
             catch (Exception ex)
             {                
@@ -44,7 +43,7 @@ namespace SistemaMonitoramento.Model.Domain
             }
         }
 
-        public void Salvar(Dispositivo obj, out string message, out string status)
+        public void Salvar(Tela obj, out string message, out string status)
         {
             try
             {
@@ -54,19 +53,19 @@ namespace SistemaMonitoramento.Model.Domain
                     message = "Problema na validação dos dados!";
                     status = "error";
                 }
-                else if (obj.dispositivo_i_id == 0)
+                else if (obj.tela_i_id == 0)
                 {
                     message = "Registro adicionado com sucesso!";
                     status = "success";                    
 
-                    doDispositivo.Insert(obj);
+                    doTela.Insert(obj);
                 }
                 else
                 {
                     message = "Registro atualizado com sucesso!";
-                    status = "success";
+                    status = "success";                    
 
-                    doDispositivo.Update(obj);
+                    doTela.Update(obj);
                 }
             }
             catch (Exception ex)
@@ -75,11 +74,11 @@ namespace SistemaMonitoramento.Model.Domain
             }
         }
 
-        public void Excluir(Dispositivo obj, out string message, out string status)
+        public void Excluir(Tela obj, out string message, out string status)
         {
             try
             {
-                if (obj.dispositivo_i_id == 0)
+                if (obj.tela_i_id == 0)
                 {
                     message = "Objeto inválido!";
                     status = "error";
@@ -87,9 +86,9 @@ namespace SistemaMonitoramento.Model.Domain
                 else
                 {
                     message = "Registro excluído com sucesso!";
-                    status = "success";
+                    status = "success";                                        
 
-                    doDispositivo.Delete(obj);
+                    doTela.Delete(obj);
                 }
             }
             catch (Exception ex)

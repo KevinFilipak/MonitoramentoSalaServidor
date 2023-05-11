@@ -28,5 +28,11 @@
         sp_Select_PermissaoEspecial_GetByUsuario,
         sp_Select_PermissaoEspecial_Validar_Permissao,
         sp_Update_Usuario_Senha,
+        sp_Insert_Dispositivo,
+        sp_Update_Dispositivo,
+        sp_Delete_Dispositivo,
+        sp_Select_Dispositivo_GetAll,
+        sp_Select_Dispositivo_GetByKey,
+        sp_Select_Dashboard,
     }
 }

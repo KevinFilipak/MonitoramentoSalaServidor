@@ -22,11 +22,11 @@
 
 <script type="text/javascript">
 
-    function Form(tela_i_id) {
+    function Form(dispositivo_i_id) {
 
         $.ajax({
             url: "@Url.Content("/CADASTROS/CA002/Form")" ,
-            data: { tela_i_id: tela_i_id  },
+            data: { dispositivo_i_id: dispositivo_i_id  },
             dataType: 'html',
             success: function (data) {
 
@@ -54,11 +54,59 @@
 
     }
 
-    function Excluir(tela_i_id, tela_s_titulo) {
+    function Codigo(dispositivo_i_id) {
+
+
+        $.ajax({
+            url: "@Url.Content("/CADASTROS/CA002/Codigo")",
+            data: { dispositivo_i_id: dispositivo_i_id },
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+
+                if (data.status == "success") {
+                    var url = "";
+
+                    //if (window.location.hostname == "iot.enerbras.app") {
+                    //    url = "https://iot.enerbras.app/" + data.caminho;
+                    //}
+                    //if {
+                    //    url = "http://localhost:49449" + data.caminho;
+                    //}
+                    //forceDownload(url, data.nome);
+                }
+                else {
+                    Swal.fire({
+                        text: data.message,
+                        icon: 'danger',
+                        buttonsStyling: false,
+                        confirmButtonText: "Fechar",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        },
+                    });
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    text: "Algo deu errado!!!",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Fechar",
+                    customClass: {
+                        confirmButton: "btn btn-danger"
+                    },
+                });
+            }
+        });
+    }
+
+
+    function Excluir(dispositivo_i_id, dispositivo_s_dispositivo) {
 
 
         Swal.fire({
-            text: 'Confirmar a exclusão da Tela ' + tela_s_titulo + '?',
+            text: 'Confirmar a exclusão do dispositivo ' + dispositivo_s_dispositivo + '?',
             title: 'Excluir',
             icon: "error",
             buttonsStyling: false,
@@ -73,7 +121,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     url: "@Url.Content("/CADASTROS/CA002/Excluir")" ,
-                    data: { tela_i_id: tela_i_id  },
+                    data: { dispositivo_i_id: dispositivo_i_id  },
                     dataType: 'json',
                     type: 'post',
                     success: function (data) {
