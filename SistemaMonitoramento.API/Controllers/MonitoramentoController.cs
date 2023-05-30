@@ -21,7 +21,7 @@ namespace SistemaMonitoramento.API.Controllers
         }
 
         [HttpGet(Name = "Monitoramento")]
-        public string Get(string Temperatura, string Umidade)
+        public string Get(string Dispositivo, string Temperatura, string Umidade)
         {
             try
             {
@@ -31,6 +31,7 @@ namespace SistemaMonitoramento.API.Controllers
                 var obj = new Monitoramento();
 
                 obj.monitoramento_f_temperatura = Convert.ToDouble(Temperatura);
+                obj.monitoramento_i_dispositivo = Convert.ToInt32(Dispositivo);
                 obj.monitoramento_f_umidade = Convert.ToDouble(Umidade);
                 obj.monitoramento_d_data = DateTime.Now;
 

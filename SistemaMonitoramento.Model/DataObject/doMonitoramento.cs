@@ -21,6 +21,7 @@ namespace SistemaMonitoramento.Model.DataObject
                     db.ExecStoreProcedure(EnumStoreProcedures.sp_Insert_Monitoramento.ToString(),
                         new RepositoryParameter[]
                         {
+                            new RepositoryParameter("@monitoramento_i_dispositivo", obj.monitoramento_i_dispositivo, DbType.Int32),
                             new RepositoryParameter("@monitoramento_f_temperatura", obj.monitoramento_f_temperatura, DbType.Double),
                             new RepositoryParameter("@monitoramento_f_umidade", obj.monitoramento_f_umidade, DbType.Double),
                             new RepositoryParameter("@monitoramento_d_data", obj.monitoramento_d_data, DbType.DateTime),

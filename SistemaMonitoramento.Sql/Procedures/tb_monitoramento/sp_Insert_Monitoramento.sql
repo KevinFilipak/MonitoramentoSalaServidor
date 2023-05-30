@@ -4,7 +4,8 @@ GO
 
 CREATE PROCEDURE sp_Insert_Monitoramento
 (
-    @monitoramento_f_temperatura	FLOAT
+    @monitoramento_i_dispositivo	INT
+   ,@monitoramento_f_temperatura	FLOAT
    ,@monitoramento_f_umidade 		FLOAT
    ,@monitoramento_d_data 			DATETIME
 
@@ -13,7 +14,8 @@ AS
 SET NOCOUNT OFF;
 
     INSERT INTO tb_monitoramento
-    SELECT @monitoramento_f_temperatura AS monitoramento_f_temperatura
+    SELECT @monitoramento_i_dispositivo	AS monitoramento_i_dispositivo
+	     , @monitoramento_f_temperatura AS monitoramento_f_temperatura
          , @monitoramento_f_umidade		AS monitoramento_f_umidade
          , @monitoramento_d_data		AS monitoramento_d_data
 
