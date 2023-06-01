@@ -12,6 +12,7 @@ namespace SistemaMonitoramento.Model.Class
         public string dispositivo_s_dispositivo { get; set; }
         public string dispositivo_s_wifi_nome { get; set; }
         public string dispositivo_s_wifi_senha { get; set; }
+        public double dispositivo_f_delay { get; set; }
         public DateTime dispositivo_d_created { get; set; }
         public string dispositivo_s_createdby { get; set; }
         public DateTime? dispositivo_d_updated { get; set; }

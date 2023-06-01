@@ -62,6 +62,12 @@
                                 @Html.TextBoxFor(m => m.dispositivo_s_wifi_senha, new { @class = "form-control form-control-lg " })
                             </div>
                         </div>
+                        <div class="row mb-3 fv-row">
+                            <label class="col-lg-3 col-form-label required fw-bold">Tempo entre Sinais (Minutos)</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.dispositivo_f_delay, new { @class = "form-control form-control-lg " })
+                            </div>
+                        </div>
 
                         <div class="row mb-3 fv-row">
                             <label class="col-lg-3 col-form-label required fw-bold">Status</label>
@@ -97,6 +103,7 @@
 
     $(document).ready(function () {
 
+        Inputmask("decimal", { rightAlignNumerics: false, radixPoint: ",", groupSeparator: ".", digits: "0" }).mask("#dispositivo_f_delay");
         $("#dispositivo_s_status").select2({ dropdownParent: $('#mdlFormulario .modal-content'), language: "pt-BR", placeholder: "-- Selecione --", allowClear: true, dropdownPosition: 'below' });
 
         const form = document.getElementById('formulario');

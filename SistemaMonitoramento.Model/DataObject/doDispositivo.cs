@@ -25,6 +25,7 @@ namespace SistemaMonitoramento.Model.DataObject
                             new RepositoryParameter("@dispositivo_s_wifi_nome", obj.dispositivo_s_wifi_nome, DbType.String),
                             new RepositoryParameter("@dispositivo_s_wifi_senha", obj.dispositivo_s_wifi_senha, DbType.String),
                             new RepositoryParameter("@dispositivo_s_status", obj.dispositivo_s_status, DbType.String),
+                            new RepositoryParameter("@dispositivo_f_delay", obj.dispositivo_f_delay, DbType.Double),
                             new RepositoryParameter("@dispositivo_d_created", obj.dispositivo_d_created, DbType.DateTime),
                             new RepositoryParameter("@dispositivo_s_createdby", obj.dispositivo_s_createdby, DbType.String),
                         });
@@ -60,6 +61,7 @@ namespace SistemaMonitoramento.Model.DataObject
                             new RepositoryParameter("@dispositivo_s_wifi_nome", obj.dispositivo_s_wifi_nome, DbType.String),
                             new RepositoryParameter("@dispositivo_s_wifi_senha", obj.dispositivo_s_wifi_senha, DbType.String),
                             new RepositoryParameter("@dispositivo_s_status", obj.dispositivo_s_status, DbType.String),
+                            new RepositoryParameter("@dispositivo_f_delay", obj.dispositivo_f_delay, DbType.Double),
                             new RepositoryParameter("@dispositivo_d_updated", obj.dispositivo_d_updated, DbType.DateTime),
                             new RepositoryParameter("@dispositivo_s_updatedby", obj.dispositivo_s_updatedby, DbType.String),
                         });

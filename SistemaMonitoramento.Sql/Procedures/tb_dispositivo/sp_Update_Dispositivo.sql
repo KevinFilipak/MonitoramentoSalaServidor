@@ -9,6 +9,7 @@ CREATE PROCEDURE sp_Update_Dispositivo
    ,@dispositivo_s_wifi_nome		VARCHAR(50)
    ,@dispositivo_s_wifi_senha	VARCHAR(50)
    ,@dispositivo_s_status VARCHAR(50)
+   ,@dispositivo_f_delay FLOAT
    ,@dispositivo_d_updated DATETIME
    ,@dispositivo_s_updatedby VARCHAR(50)
 )
@@ -22,6 +23,7 @@ SET NOCOUNT OFF;
 	     , dispositivo_s_status = @dispositivo_s_status
          , dispositivo_d_updated = @dispositivo_d_updated
          , dispositivo_s_updatedby = @dispositivo_s_updatedby
+		 , dispositivo_f_delay    = (@dispositivo_f_delay * 60000)
     WHERE dispositivo_i_id = @dispositivo_i_id
 
 SET NOCOUNT ON;

@@ -8,17 +8,20 @@ CREATE PROCEDURE sp_Insert_Dispositivo
    ,@dispositivo_s_wifi_nome		VARCHAR(50)
    ,@dispositivo_s_wifi_senha		VARCHAR(50)
    ,@dispositivo_s_status			VARCHAR(50)
+   ,@dispositivo_f_delay			FLOAT
    ,@dispositivo_d_created			DATETIME
    ,@dispositivo_s_createdby		VARCHAR(50)
 )
 AS
 SET NOCOUNT OFF;
 
+
     INSERT INTO tb_dispositivo
     SELECT @dispositivo_s_dispositivo AS dispositivo_s_dispositivo
 		 , @dispositivo_s_wifi_nome	  AS dispositivo_s_wifi_nome
 		 , @dispositivo_s_wifi_senha  AS dispositivo_s_wifi_senha
 	     , @dispositivo_s_status	  AS dispositivo_s_status
+		 , (@dispositivo_f_delay * 60000)	  AS dispositivo_f_delay
          , @dispositivo_d_created     AS dispositivo_d_created
          , @dispositivo_s_createdby   AS dispositivo_s_createdby
          , NULL						  AS dispositivo_d_updated
