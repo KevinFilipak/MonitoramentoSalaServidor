@@ -3,8 +3,8 @@
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
-     
-     
+
+
     .table tbody tr td {
         padding-right: 0px !important;
     }
@@ -67,6 +67,11 @@
         border-color: #181c32 !important
     }
 
+    .i-dashboard{
+            line-height: 1;
+            font-size: 4rem;
+    }
+
 </style>
 
 @foreach (var objeto in ViewBag.Objetos)
@@ -84,7 +89,9 @@
                 </div>
                 <div class="col-md-4 mt-7">
                     <div class="center display-3">
+                        <i class="fas fa-arrow-up i-dashboard text-danger me-3"></i>
                         <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_temperatura</span>
+
                     </div>
                     <div class="center">
                         <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Temperatura Atual</span>
@@ -92,6 +99,47 @@
                 </div>
                 <div class="col-md-4 mt-7">
                     <div class="center display-3">
+                        <i class="fas fa-check i-dashboard text-danger me-3"></i>
+                        <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_umidade</span>
+
+                    </div>
+                    <div class="center">
+                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Umidade Atual</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+    <br />
+}
+
+@foreach (var objeto in ViewBag.Objetos)
+{
+    <div class="card border border-3 border-dashed border-primary">
+        <div class="card-body py-1 align-content-center">
+            <div class="row">
+                <div class="col-md-4 mt-7">
+                    <div class="center display-3">
+                        <span class="card-label fw-bolder text-black">@objeto.dashboard_s_dispositivo</span>
+                    </div>
+                    <div class="center">
+                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Dispositivo</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-7">
+                    <div class="center display-3">
+                        <i class="fas fa-arrow-down i-dashboard text-danger me-3"></i>
+                        <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_temperatura</span>
+
+                    </div>
+                    <div class="center">
+                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Temperatura Atual</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-7">
+                    <div class="center display-3">
+                        <i class="fas fa-check i-dashboard me-3 text-danger"></i>
                         <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_umidade</span>
                     </div>
                     <div class="center">
@@ -100,8 +148,8 @@
                 </div>
             </div>
         </div>
-        <br/>
+        <br />
     </div>
-    <br/>
+    <br />
 }
 
