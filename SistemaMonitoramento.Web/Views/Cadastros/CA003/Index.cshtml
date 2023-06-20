@@ -1,0 +1,94 @@
+﻿<div class="card">
+    <div class="form d-flex flex-center">
+        <div class="card-body mw-800px py-20">
+
+            <div class="row mb-8 fv-row">
+                <label class="col-lg-3 col-form-label required fw-bold">Data Inicial</label>
+                <div class="col-lg-9">
+                    @Html.TextBox("data_inicial", DateTime.Now.ToString("dd/MM/yyyy"), new { @class = "form-control form-control-lg " })
+                </div>
+            </div>
+
+            <div class="row mb-8 fv-row">
+                <label class="col-lg-3 col-form-label required fw-bold">Data Final</label>
+                <div class="col-lg-9">
+                    @Html.TextBox("data_final", DateTime.Now.ToString("dd/MM/yyyy"), new { @class = "form-control form-control-lg " })
+                </div>
+            </div>
+
+            <div class="row mb-8 fv-row">
+                <label class="col-lg-3 col-form-label">Conta Bancária</label>
+                <div class="col-lg-9">
+                    <div class="spinner spinner-sm spinner-primary spinner-right">
+                        @Html.DropDownList("dispositivo_i_dispositivo", null, "", new { @class = "form-select form-select-lg" })
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <hr />
+            <br />
+
+            <div class="row mb-8 fv-row">
+                <label class="col-lg-3 col-form-label">Formato</label>
+                <div class="col-lg-9">
+                    <div class="spinner spinner-sm spinner-primary spinner-right">
+                        @Html.DropDownList("formato", null, "", new { @class = "form-select form-select-lg" })
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row ">
+                <label class="col-lg-3 col-form-label"></label>
+                <div class="col-lg-9">
+                    <button id="btnGerarRelatorio" type="button" class="btn btn-primary fw-bolder px-6 py-3 me-3" onclick="GerarRelatorio()">
+                        Gerar Relatório
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#formato").val("PDF");
+
+        $("#dispositivo_i_dispositivo").select2({ language: "pt-BR", placeholder: "-- Selecione --", allowClear: true, dropdownPosition: 'below' });
+        $("#formato").select2({ language: "pt-BR", placeholder: "-- Selecione --", allowClear: true, dropdownPosition: 'below' });
+
+        Inputmask({ mask: "99/99/9999" }).mask("#data_inicial");
+
+        $("#data_inicial").flatpickr({ locale: "pt", dateFormat: "d/m/Y", allowInput: true });
+
+        Inputmask({ mask: "99/99/9999" }).mask("#data_final");
+
+        $("#data_final").flatpickr({ locale: "pt", dateFormat: "d/m/Y", allowInput: true });
+
+    });
+
+
+    function GerarRelatorio() {
+
+        var formato = $('#formato').val();
+        var dispositivo_i_dispositivo = $('#dispositivo_i_dispositivo').val();
+        var data_inicial = $('#data_inicial').val();
+        var data_final = $('#data_final').val();
+
+        var url = "@Url.Content("/Cadastros/CA003/GerarDados")";
+
+        window.open(url + "?dispositivo_i_dispositivo=" + dispositivo_i_dispositivo + "&data_inicial=" + data_inicial + "&data_final=" + data_final + "&formato=" + formato, ' Relatório', 'width=700,height=700');
+
+    }
+
+
+
+</script>
