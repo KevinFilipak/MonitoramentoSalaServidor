@@ -85,8 +85,20 @@
 
         var url = "@Url.Content("/Cadastros/CA003/GerarDados")";
 
-        window.open(url + "?dispositivo_i_dispositivo=" + dispositivo_i_dispositivo + "&data_inicial=" + data_inicial + "&data_final=" + data_final + "&formato=" + formato, ' Relatório', 'width=700,height=700');
-
+        if ($('#dispositivo_i_dispositivo').val() == "") {
+            Swal.fire({
+                text: "Favor selecionar o dispositivo!!!",
+                icon: "danger",
+                buttonsStyling: false,
+                confirmButtonText: "Fechar",
+                customClass: {
+                    confirmButton: "btn btn-danger"
+                },
+            });
+        }
+        else{
+            window.open(url + "?dispositivo_i_dispositivo=" + dispositivo_i_dispositivo + "&data_inicial=" + data_inicial + "&data_final=" + data_final + "&formato=" + formato, ' Relatório', 'width=700,height=700');
+        }
     }
 
 
