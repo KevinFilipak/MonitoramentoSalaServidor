@@ -15,15 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\reports\Orcamento.rdlc" />
-    <Content Remove="wwwroot\reports\Pedido.rdlc" />
-    <Content Remove="wwwroot\reports\Report1.rdlc" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="wwwroot\reports\Pedido.rdlc" />
-    <EmbeddedResource Include="wwwroot\reports\Orcamento.rdlc" />
-    <EmbeddedResource Include="wwwroot\reports\Report1.rdlc" />
+    <Content Remove="wwwroot\reports\rpt_CA003.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +34,10 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\reports\rpt_CA003.rdlc" />
   </ItemGroup>
 
 </Project>

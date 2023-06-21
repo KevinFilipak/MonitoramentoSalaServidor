@@ -35,7 +35,7 @@ namespace SistemaMonitoramento.Web.Controllers.Cadastros
         {
             try
             {
-                ViewData["formato"] = new SelectList(new List<string> { "PDF", "Excel" });
+                ViewData["formato"] = new SelectList(new List<string> { "PDF" });
 
                 var dispositivos = _ctx.ctxDispositivo.BuscarTodos("");
 
@@ -54,7 +54,7 @@ namespace SistemaMonitoramento.Web.Controllers.Cadastros
             try
             {
 
-                string _report = "rpt_RL002";
+                string _report = "rpt_CA003";
 
                 var _parametros = new Dictionary<KeyValuePair<string, string>, DbType>
                 {
@@ -65,7 +65,6 @@ namespace SistemaMonitoramento.Web.Controllers.Cadastros
 
                 var _ds = _ctx.ctxRelatorio.BuscarDados(Model.Enumerators.EnumStoreProcedures.sp_Report_CA003, _parametros);
 
-
                 if (formato == "PDF")
                 {
                     var _result = ReportModel.GerarRelatorio(RenderType.Pdf, _report, _ds, _webHostEnvironment);
@@ -74,7 +73,7 @@ namespace SistemaMonitoramento.Web.Controllers.Cadastros
                 else
                 {
                     var _result = ReportModel.GerarRelatorio(RenderType.ExcelOpenXml, _report, _ds, _webHostEnvironment);
-                    return File(_result.MainStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "RL_001.xlsx");
+                    return File(_result.MainStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "CA_003.xlsx");
 
                 }
 
