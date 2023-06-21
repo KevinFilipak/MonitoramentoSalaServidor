@@ -5,8 +5,8 @@ GO
 CREATE PROCEDURE sp_Report_CA003
 (
      @dispositivo_i_dispositivo INT  
-    ,@data_inicial              DATE
-    ,@data_final                DATE
+    ,@data_inicial              DATETIME
+    ,@data_final                DATETIME
 )
 
 AS

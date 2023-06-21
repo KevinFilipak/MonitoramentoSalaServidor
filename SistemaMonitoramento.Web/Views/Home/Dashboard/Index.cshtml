@@ -43,6 +43,10 @@
         border-color: #20d489 !important
     }
 
+    .text-primary {
+        color: #20d489 !important
+    }
+
     .border-secondary {
         border-color: #e4e6ef !important
     }
@@ -76,7 +80,7 @@
 
 @foreach (var objeto in ViewBag.Objetos)
 {
-    <div class="card border border-3 border-dashed border-primary">
+    <div class="card border border-3 border-dashed border-@objeto.dashboard_s_cor_borda">
         <div class="card-body py-1 align-content-center">
             <div class="row">
                 <div class="col-md-4 mt-7">
@@ -89,8 +93,8 @@
                 </div>
                 <div class="col-md-4 mt-7">
                     <div class="center display-3">
-                        <i class="fas fa-arrow-up i-dashboard text-danger me-3"></i>
-                        <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_temperatura</span>
+                        <i class="fas @objeto.dashboard_s_icone_temperatura i-dashboard text-@objeto.dashboard_s_cor_temperatura me-3"></i>
+                        <span class="card-label fw-bolder text-@objeto.dashboard_s_cor_temperatura">@objeto.dashboard_s_temperatura</span>
 
                     </div>
                     <div class="center">
@@ -99,48 +103,8 @@
                 </div>
                 <div class="col-md-4 mt-7">
                     <div class="center display-3">
-                        <i class="fas fa-check i-dashboard text-danger me-3"></i>
-                        <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_umidade</span>
-
-                    </div>
-                    <div class="center">
-                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Umidade Atual</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br />
-    </div>
-    <br />
-}
-
-@foreach (var objeto in ViewBag.Objetos)
-{
-    <div class="card border border-3 border-dashed border-primary">
-        <div class="card-body py-1 align-content-center">
-            <div class="row">
-                <div class="col-md-4 mt-7">
-                    <div class="center display-3">
-                        <span class="card-label fw-bolder text-black">@objeto.dashboard_s_dispositivo</span>
-                    </div>
-                    <div class="center">
-                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Dispositivo</span>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-7">
-                    <div class="center display-3">
-                        <i class="fas fa-arrow-down i-dashboard text-danger me-3"></i>
-                        <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_temperatura</span>
-
-                    </div>
-                    <div class="center">
-                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Temperatura Atual</span>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-7">
-                    <div class="center display-3">
-                        <i class="fas fa-check i-dashboard me-3 text-danger"></i>
-                        <span class="card-label fw-bolder text-danger">@objeto.dashboard_s_umidade</span>
+                        <i class="fas @objeto.dashboard_s_icone_umidade i-dashboard me-3 text-@objeto.dashboard_s_cor_umidade"></i>
+                        <span class="card-label fw-bolder text-@objeto.dashboard_s_cor_umidade">@objeto.dashboard_s_umidade</span>
                     </div>
                     <div class="center">
                         <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Umidade Atual</span>
