@@ -34,5 +34,6 @@
         sp_Select_Dispositivo_GetAll,
         sp_Select_Dispositivo_GetByKey,
         sp_Select_Dashboard,
+        sp_Report_CA003,
     }
 }

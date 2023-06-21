@@ -21,4 +21,8 @@
     <ProjectReference Include="..\SistemaMonitoramento.DataAccess\SistemaMonitoramento.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Report\" />
+  </ItemGroup>
+
 </Project>
