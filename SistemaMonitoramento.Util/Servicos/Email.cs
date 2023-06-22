@@ -28,7 +28,7 @@ namespace SistemaMonitoramento.Util.Servicos
             client.Credentials = new System.Net.NetworkCredential(email_s_remetente, email_s_senha);
 
             MailMessage mensagem = new MailMessage(email_s_remetente, emaiL_s_destinatario, email_s_assunto, email_s_corpo);
-
+            mensagem.IsBodyHtml = true;
             client.Send(mensagem);
 
             return "";
