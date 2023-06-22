@@ -54,13 +54,16 @@ namespace SistemaMonitoramento.Web.Controllers.Cadastros
             try
             {
 
+                var dt_inicial = data_inicial.Substring(6,4) + "-" + data_inicial.Substring(3, 2) + "-" + data_inicial.Substring(0,2);
+                var dt_final = data_final.Substring(6, 4) + "-" + data_final.Substring(3, 2) + "-" + data_final.Substring(0, 2);
+
                 string _report = "rpt_CA003";
 
                 var _parametros = new Dictionary<KeyValuePair<string, string>, DbType>
                 {
                     { new KeyValuePair<string, string>("@dispositivo_i_dispositivo", dispositivo_i_dispositivo.ToString()), DbType.Int32 },
-                    { new KeyValuePair<string, string>("@data_inicial", DateTime.Parse(data_inicial).ToString("yyyy-MM-dd")), DbType.DateTime },
-                    { new KeyValuePair<string, string>("@data_final", DateTime.Parse(data_final).ToString("yyyy-MM-dd")), DbType.DateTime },
+                    { new KeyValuePair<string, string>("@data_inicial", DateTime.Parse(dt_inicial).ToString("yyyy-MM-dd")), DbType.DateTime },
+                    { new KeyValuePair<string, string>("@data_final", DateTime.Parse(dt_final).ToString("yyyy-MM-dd")), DbType.DateTime },
                 };
 
                 var _ds = _ctx.ctxRelatorio.BuscarDados(Model.Enumerators.EnumStoreProcedures.sp_Report_CA003, _parametros);

@@ -1,0 +1,119 @@
+﻿<style type="text/css">
+    .table td:first-child, .table th:first-child, .table tr:first-child {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+
+    .table tbody tr td {
+        padding-right: 0px !important;
+    }
+
+    .table > :not(caption) > * > * {
+        padding-right: 0px !important;
+    }
+
+    .table tbody tr td {
+        padding-top: 13px !important;
+        padding-bottom: 13px !important;
+    }
+
+    .table td, .table th, .table tr {
+        font-size: 20px !important;
+        font-weight: 800 !important;
+    }
+
+    .table th {
+        color: #b5b5c3 !important
+    }
+
+    .card-body {
+        font-weight: 800 !important;
+    }
+
+    .border-white {
+        border-color: #fff !important
+    }
+
+    .border-light {
+        border-color: #f5f8fa !important
+    }
+
+    .border-primary {
+        border-color: #20d489 !important
+    }
+
+    .text-primary {
+        color: #20d489 !important
+    }
+
+    .border-secondary {
+        border-color: #e4e6ef !important
+    }
+
+    .border-success {
+        border-color: #00b2ff !important
+    }
+
+    .border-info {
+        border-color: #5710b2 !important
+    }
+
+    .border-warning {
+        border-color: #ffc700 !important
+    }
+
+    .border-danger {
+        border-color: #f1416c !important
+    }
+
+    .border-dark {
+        border-color: #181c32 !important
+    }
+
+    .i-dashboard{
+            line-height: 1;
+            font-size: 4rem;
+    }
+
+</style>
+
+@foreach (var objeto in ViewBag.Objetos)
+{
+    <div class="card border border-3 border-dashed border-@objeto.dashboard_s_cor_borda">
+        <div class="card-body py-1 align-content-center">
+            <div class="row">
+                <div class="col-md-4 mt-7">
+                    <div class="center display-3">
+                        <span class="card-label fw-bolder text-black">@objeto.dashboard_s_dispositivo</span>
+                    </div>
+                    <div class="center">
+                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Dispositivo</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-7">
+                    <div class="center display-3">
+                        <i class="fas @objeto.dashboard_s_icone_temperatura i-dashboard text-@objeto.dashboard_s_cor_temperatura me-3"></i>
+                        <span class="card-label fw-bolder text-@objeto.dashboard_s_cor_temperatura">@objeto.dashboard_s_temperatura</span>
+
+                    </div>
+                    <div class="center">
+                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Temperatura Atual</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-7">
+                    <div class="center display-3">
+                        <i class="fas @objeto.dashboard_s_icone_umidade i-dashboard me-3 text-@objeto.dashboard_s_cor_umidade"></i>
+                        <span class="card-label fw-bolder text-@objeto.dashboard_s_cor_umidade">@objeto.dashboard_s_umidade</span>
+                    </div>
+                    <div class="center">
+                        <span class="text-muted mt-3 fw-bold fs-4 center text-secondary">Umidade Atual</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+    <br />
+}
+

@@ -63,7 +63,16 @@ namespace SistemaMonitoramento.Web.Controllers.Home
             return View("~/Views/Home/Dashboard/Denied.cshtml");
         }
 
-        
+        [HttpGet("Home/Dashboard/Visualizar")]
+        public ActionResult Visualizar()
+        {
+            var obj = _ctx.ctxDashboard.BuscarTodos("");
+
+            ViewBag.Objetos = obj;
+
+            return PartialView("~/Views/Home/Dashboard/Render.cshtml");
+        }
+
 
         [HttpGet("Home/Dashboard/Print")]
         public IActionResult Print()
