@@ -140,8 +140,8 @@ namespace SistemaMonitoramento.Web.Controllers.Cadastros
             try
             {
                 var obj = _ctx.ctxDispositivo.BuscarPorId(dispositivo_i_id);
-                string Caminho = Path.Combine(_webHostEnvironment.WebRootPath, "Reports", "Codigo.ino");
-                string CaminhoDownload = Path.Combine(_webHostEnvironment.WebRootPath, "Export", Guid.NewGuid().ToString() + "\\");
+                string Caminho = Path.Combine(_webHostEnvironment.WebRootPath, "reports", "Codigo.ino");
+                string CaminhoDownload = Path.Combine(_webHostEnvironment.WebRootPath, "Export", Guid.NewGuid().ToString() + "/");
                 string NomeArquivo = $"Dispositivo_{obj.dispositivo_s_dispositivo}.ino";
                 _ctx.ctxDispositivo.GerarCodigo(obj, Caminho, CaminhoDownload, NomeArquivo);
 
