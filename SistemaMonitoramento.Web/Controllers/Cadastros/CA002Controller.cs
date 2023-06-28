@@ -142,13 +142,15 @@ namespace SistemaMonitoramento.Web.Controllers.Cadastros
                 var obj = _ctx.ctxDispositivo.BuscarPorId(dispositivo_i_id);
                 string Caminho = Path.Combine(_webHostEnvironment.WebRootPath, "Reports", "Codigo.ino");
                 string CaminhoDownload = Path.Combine(_webHostEnvironment.WebRootPath, "Export", Guid.NewGuid().ToString() + "\\");
-                string NomeArquivo = $"Dispositivo_{obj.dispositivo_s_dispositivo}.txt";
+                string NomeArquivo = $"Dispositivo_{obj.dispositivo_s_dispositivo}.ino";
                 _ctx.ctxDispositivo.GerarCodigo(obj, Caminho, CaminhoDownload, NomeArquivo);
 
-                var contentType = "text/plain";
                 var fileName = NomeArquivo;
 
-                return File(Path.Combine(CaminhoDownload, NomeArquivo), contentType, fileName);
+                var fileStream = new FileStream(Path.Combine(CaminhoDownload, NomeArquivo), FileMode.Open, FileAccess.Read, FileShare.Read);
+
+                return File(fileStream, "application/octet-stream", fileName);
+
             }
             catch (Exception ex)
             {

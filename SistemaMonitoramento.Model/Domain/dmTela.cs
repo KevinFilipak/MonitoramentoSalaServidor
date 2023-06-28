@@ -105,10 +105,12 @@ namespace SistemaMonitoramento.Model.Domain
             {
                 string Codigo = System.IO.File.ReadAllText(Caminho);
 
+                var delay = obj.dispositivo_f_delay * 60000;
+
                 Codigo = Codigo.Replace("#REDEWIFI", obj.dispositivo_s_wifi_nome);
                 Codigo = Codigo.Replace("#CODIGODISPOSITIVO", obj.dispositivo_i_id.ToString());
                 Codigo = Codigo.Replace("#IPWIFI", obj.dispositivo_s_wifi_senha.ToString());
-                Codigo = Codigo.Replace("#DELAYSINAL", obj.dispositivo_f_delay.ToString());
+                Codigo = Codigo.Replace("#DELAYSINAL", delay.ToString());
 
 
                 if (!Directory.Exists(Path.Combine(CaminhoDownload)))
