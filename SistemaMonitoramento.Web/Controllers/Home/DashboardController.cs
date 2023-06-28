@@ -38,8 +38,6 @@ namespace SistemaMonitoramento.Web.Controllers.Home
         [HttpGet("Home/Dashboard/Error")]
         public IActionResult Error()
         {
-            var teste = 1 / (Convert.ToDouble(0));
-
             return View("~/Views/Home/Dashboard/Error.cshtml");
         }
 

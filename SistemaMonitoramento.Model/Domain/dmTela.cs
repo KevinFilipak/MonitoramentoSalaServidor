@@ -2,6 +2,7 @@
 using SistemaMonitoramento.Model.DataObject;
 using SistemaMonitoramento.Model.Validation;
 using SistemaMonitoramento.Model.DataObject;
+using SistemaMonitoramento.Util.Logs;
 
 namespace SistemaMonitoramento.Model.Domain
 {
@@ -96,6 +97,38 @@ namespace SistemaMonitoramento.Model.Domain
             {                
                 throw new Exception(ex.Message);
             }
-        }        
+        }
+
+        public void GerarCodigo(Dispositivo obj, string Caminho, string CaminhoDownload, string NomeArquivo)
+        {
+            try
+            {
+                string Codigo = System.IO.File.ReadAllText(Caminho);
+
+                Codigo = Codigo.Replace("#REDEWIFI", obj.dispositivo_s_wifi_nome);
+                Codigo = Codigo.Replace("#CODIGODISPOSITIVO", obj.dispositivo_i_id.ToString());
+                Codigo = Codigo.Replace("#IPWIFI", obj.dispositivo_s_wifi_senha.ToString());
+                Codigo = Codigo.Replace("#DELAYSINAL", obj.dispositivo_f_delay.ToString());
+
+
+                if (!Directory.Exists(Path.Combine(CaminhoDownload)))
+                    Directory.CreateDirectory(CaminhoDownload);
+
+                if (File.Exists(CaminhoDownload + NomeArquivo))
+                {
+                    File.Delete(CaminhoDownload + NomeArquivo);
+                }
+
+                File.WriteAllText(CaminhoDownload + NomeArquivo, Codigo);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Log.GerarLog(ex);
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

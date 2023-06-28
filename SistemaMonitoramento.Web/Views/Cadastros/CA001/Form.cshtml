@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="row mb-3 fv-row">
-                            <label class="col-lg-3 col-form-label fw-bold">Senha</label>
+                            <label class="col-lg-3 col-form-label required fw-bold">Senha</label>
                             <div class="col-lg-9">
                                 @Html.PasswordFor(m => m.usuario_s_senha, new { @class = "form-control form-control-lg " })
                             </div>
@@ -57,7 +57,7 @@
                             </div>
                         </div>                                                                    
                         <div class="row mb-3 fv-row">
-                            <label class="col-lg-3 col-form-label fw-bold">Função</label>
+                            <label class="col-lg-3 col-form-label required fw-bold">Função</label>
                             <div class="col-lg-9">
                                 @Html.TextBoxFor(m => m.usuario_s_funcao, new { @class = "form-control form-control-lg " })
                             </div>
@@ -132,6 +132,12 @@
                         validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
                     },
                     'usuario_s_email': {
+                        validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
+                    },
+                    'usuario_s_funcao': {
+                        validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
+                    },
+                    'usuario_s_senha': {
                         validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
                     },
                     'usuario_s_status': {

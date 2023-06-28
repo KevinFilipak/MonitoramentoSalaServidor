@@ -12,3 +12,5 @@
 /SistemaMonitoramento.Sql/obj
 /SistemaMonitoramento.Web/bin
 /SistemaMonitoramento.Web/obj
+/SistemaMonitoramento.Web/wwwroot/Export
+/SistemaMonitoramento.Web/wwwroot/images/perfil

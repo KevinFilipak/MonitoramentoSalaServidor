@@ -111,14 +111,20 @@
         validator = FormValidation.formValidation(
             form,
             {
-                fields: {                    
+                fields: {
                     'dispositivo_s_dispositivo': {
                         validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
                     },
-                    'dispositivo_s_status': {
+                    'dispositivo_s_wifi_nome': {
                         validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
                     },
-                    'tela_s_titulo': {
+                    'dispositivo_s_wifi_senha': {
+                        validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
+                    },
+                    'dispositivo_f_delay': {
+                        validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
+                    },
+                    'dispositivo_s_status': {
                         validators: { notEmpty: { message: 'Preenchimento obrigatório' } },
                     }
                 },
@@ -150,7 +156,7 @@
                     submitButton.disabled = true;
 
                     $.ajax({
-                        url: "@Url.Content("/CADASTROS/CA002/Form")" ,
+                        url: "@Url.Content("/CADASTROS/CA002/Form")",
                         data: $('#formulario').serialize(),
                         dataType: 'json',
                         type: 'post',

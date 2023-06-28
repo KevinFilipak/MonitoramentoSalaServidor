@@ -15,11 +15,14 @@ namespace SistemaMonitoramento.Web.Controllers.Cadastros
     {
         private readonly ILogger<CA002Controller> _logger;
         private readonly IContext _ctx;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CA002Controller(ILogger<CA002Controller> logger, IContext ctx)
+
+        public CA002Controller(ILogger<CA002Controller> logger, IContext ctx, IWebHostEnvironment webHostEnvironment)
         {
             _logger = logger;
             _ctx = ctx;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet("Cadastros/CA002/Index")]
@@ -132,20 +135,20 @@ namespace SistemaMonitoramento.Web.Controllers.Cadastros
 
         }
 
-        public JsonResult Codigo(int dispositivo_i_id)
+        public IActionResult Codigo(int dispositivo_i_id)
         {
             try
             {
-                //        var obj = _ctx.ctxDispositivo.BuscarPorId(dispositivo_i_id);
-                //        string Caminho = Path.Combine(Server.MapPath("~/Anexos/Cadastros/Codigo/Codigo.ino"));
-                //        string CaminhoDownload = $"~/Export/{Guid.NewGuid()}/";
-                //        string NomeArquivo = $"Dispositivo_{obj.dispositivo_s_codigo}.ino";
-                //        _ctx.ctxDispositivo.GerarCodigo(obj, Caminho, Server.MapPath(CaminhoDownload), NomeArquivo);
+                var obj = _ctx.ctxDispositivo.BuscarPorId(dispositivo_i_id);
+                string Caminho = Path.Combine(_webHostEnvironment.WebRootPath, "Reports", "Codigo.ino");
+                string CaminhoDownload = Path.Combine(_webHostEnvironment.WebRootPath, "Export", Guid.NewGuid().ToString() + "\\");
+                string NomeArquivo = $"Dispositivo_{obj.dispositivo_s_dispositivo}.txt";
+                _ctx.ctxDispositivo.GerarCodigo(obj, Caminho, CaminhoDownload, NomeArquivo);
 
-                var message = "Arquivo baixado com sucesso!";
-                var status = "success";
+                var contentType = "text/plain";
+                var fileName = NomeArquivo;
 
-                return Json(new { status = status, message = message });
+                return File(Path.Combine(CaminhoDownload, NomeArquivo), contentType, fileName);
             }
             catch (Exception ex)
             {

@@ -22,9 +22,9 @@ SET NOCOUNT OFF;
          , @usuario_s_senha AS usuario_s_senha
          , @usuario_s_nome AS usuario_s_nome
          , @usuario_s_email AS usuario_s_email
+		 , @usuario_s_foto AS usuario_s_foto 
+		 , @usuario_s_funcao AS usuario_s_funcao         
          , @usuario_s_status AS usuario_s_status
-         , @usuario_s_foto AS usuario_s_foto 
-         , @usuario_s_funcao AS usuario_s_funcao         
          , @usuario_d_created AS usuario_d_created
          , @usuario_s_createdby AS usuario_s_createdby
          , NULL AS usuario_d_updated

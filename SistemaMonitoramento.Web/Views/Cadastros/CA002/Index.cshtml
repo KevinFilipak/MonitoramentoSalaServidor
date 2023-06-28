@@ -56,49 +56,10 @@
 
     function Codigo(dispositivo_i_id) {
 
+        var url = "@Url.Content("/CADASTROS/CA002/Codigo")";
 
-        $.ajax({
-            url: "@Url.Content("/CADASTROS/CA002/Codigo")",
-            data: { dispositivo_i_id: dispositivo_i_id },
-            dataType: 'json',
-            type: 'post',
-            success: function (data) {
+        window.open(url + "?dispositivo_i_id=" + dispositivo_i_id, ' Código', 'width=700,height=700');
 
-                if (data.status == "success") {
-                    var url = "";
-
-                    //if (window.location.hostname == "iot.enerbras.app") {
-                    //    url = "https://iot.enerbras.app/" + data.caminho;
-                    //}
-                    //if {
-                    //    url = "http://localhost:49449" + data.caminho;
-                    //}
-                    //forceDownload(url, data.nome);
-                }
-                else {
-                    Swal.fire({
-                        text: data.message,
-                        icon: 'danger',
-                        buttonsStyling: false,
-                        confirmButtonText: "Fechar",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        },
-                    });
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                Swal.fire({
-                    text: "Algo deu errado!!!",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Fechar",
-                    customClass: {
-                        confirmButton: "btn btn-danger"
-                    },
-                });
-            }
-        });
     }
 
 
